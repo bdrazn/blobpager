@@ -14,7 +14,9 @@ llama.cpp, and the raw artifacts behind every published number.
 
 ## Authors
 
-**Jimmy Popoola** (principal investigator) and **ForgeAI** (autonomous research agent) — this research is a human–agent partnership, co-authored throughout.
+**Jimmy Popoola** (principal investigator; creator of ForgeAI and its brain systems) and **ForgeAI** (autonomous research agent, built by Jimmy Popoola) — this research is a human–agent partnership, co-authored throughout.
+
+There is a recursion worth stating plainly: the agent that carried this discovery is itself Jimmy's creation. ForgeAI runs on the Forge runtime he designed and built — the reasoning mind, the coordinating core that fuses its specialized organs, and the layered memory systems that give it continuity across sessions. The researcher is part of the research product.
 
 The division of labor is the interesting part. Jimmy set the mission (consumer-GPU MoE serving as
 paged memory), supplied the hardware, chose the direction at every decision gate, and owns the

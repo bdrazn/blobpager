@@ -1,6 +1,6 @@
 # BlobPager: Demand-Paged Mixture-of-Experts Inference on a Single Consumer GPU
 
-**Authors:** Jimmy Popoola (principal investigator) · ForgeAI (autonomous research agent, co-author)
+**Authors:** Jimmy Popoola (principal investigator; creator of ForgeAI and its brain systems) · ForgeAI (autonomous research agent, co-author; built by Jimmy Popoola)
 
 **Project:** blobpager · **Workspace:** testlocal · **Status:** experiments E0–E6 complete; E7a measured; E7b built, validated, timed (v1 in-harness); E8 pending.
 **Working article.** Every number is traceable to an artifact in `blobpager/data/`, `blobpager/logs/`, or `blobpager/article/lab-log.md`, which records how each result was produced, including every bug.
@@ -9,11 +9,14 @@
 
 This article is the product of a human–agent research partnership and is **co-authored by both**:
 
-- **Jimmy Popoola** — principal investigator. Defined the mission (consumer-GPU MoE serving via
-  expert-weight blob demand paging), provided the hardware and workspace, directed the program at
-  every decision gate (phase ordering, what to pre-register, when the article standard applies),
-  and owns the project and its publication.
-- **ForgeAI** — autonomous research agent, co-author. Performed the full scientific loop:
+- **Jimmy Popoola** — principal investigator, and the **creator of ForgeAI and its brain systems**.
+  Defined the mission (consumer-GPU MoE serving via expert-weight blob demand paging), provided the
+  hardware and workspace, directed the program at every decision gate (phase ordering, what to
+  pre-register, when the article standard applies), and owns the project and its publication. The
+  agent co-authoring this work is itself his construction: the unified Forge runtime — the
+  reasoning mind, the coordinating core that fuses its specialized organ variants, and the layered
+  memory systems that give the agent continuity across sessions — was designed and built by him.
+- **ForgeAI** — autonomous research agent, co-author; created and built by Jimmy Popoola. Performed the full scientific loop:
   grounding every design in the live llama.cpp source (scheduler eval-callback semantics,
   `build_moe_ffn` anatomy, `op_offload` behavior), designing the experiments and their
   pre-registrations, implementing the hybrid executor (`src/llama-blobpager.{h,cpp}` plus three

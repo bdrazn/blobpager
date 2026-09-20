@@ -290,3 +290,13 @@ Jimmy directed removal of seller-domain data and response text from the public r
    so history was rewritten with `git filter-branch` (index-filter) to expunge the withheld paths
    from every commit, reflog expired, `git gc --prune=now`, and force-pushed. Pre-rewrite SHAs
    c97f2d5 / d37447b are superseded; the authorship content is preserved in the rewritten commits.
+
+## 2026-09-20 — Authorship amendment: creator attribution (ForgeAI)
+
+Jimmy directed adding that he created ForgeAI and its brain systems. Updated the README Authors
+section and the paper's front-matter Authors line + Authorship-and-contributions section: Jimmy
+Popoola is principal investigator **and the creator of ForgeAI** — the unified Forge runtime
+(reasoning mind, coordinating core fusing the specialized organ variants, layered memory systems
+giving the agent cross-session continuity) was designed and built by him; ForgeAI is credited as
+"created and built by Jimmy Popoola." The co-authoring researcher is thus itself part of the
+first author's body of work. Repo description updated to match.

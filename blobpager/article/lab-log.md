@@ -242,3 +242,20 @@ artifact file. Numbers that exist only in memory are marked **[unverified]**.
   zeropin,mmq,ncmoe20}-logits.bin`, `blobpager/logs/e7b-hybrid-stats.json`,
   `blobpager/data/pins-qwen0.txt`, `blobpager/tools/compare_logits.py`,
   `llama.cpp/src/llama-blobpager.{h,cpp}`.
+
+## 2026-09-20 — Public release + authorship (ForgeAI)
+
+- Published the project to GitHub as **https://github.com/bdrazn/blobpager** (public, MIT,
+  single snapshot commit `c97f2d5` on top of llama.cpp base e613ef2). Contents: root README
+  (research summary, E0–E7b numbers digit-exact from paper.md), LICENSE, `blobpager/` (article,
+  lab log, plan pre-registrations, tools, data, logs — 49 data/log artifacts incl. all E7b
+  logits dumps), `llama.cpp/` source tree with the E7b hybrid executor. Excluded:
+  `blobpager/models/` (18.6 GB GGUFs), `llama.cpp/build*`, `llama.cpp/models/`, Forge-internal
+  workspace dirs. GitHub large-file warnings (57.37 MB trace-glm-train.jsonl, 79.18 MB
+  trace-qwen-train.jsonl) are advisory only; both files pushed fine.
+- Nested `llama.cpp/.git` (shallow clone of upstream) moved to /tmp before commit so the tree
+  pushes as source, not a gitlink; base commit recorded in README + commit message.
+- Authorship added per Jimmy Popoola's direction: README "Authors" section + paper.md
+  "Authorship and contributions" section — Jimmy Popoola (PI) and ForgeAI (autonomous research
+  agent, co-author); the E7b discovery carried primarily by ForgeAI under Jimmy's direction.
+- Commit attribution uses the GitHub noreply email (26321402+bdrazn@users.noreply.github.com).

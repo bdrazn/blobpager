@@ -1,7 +1,32 @@
 # BlobPager: Demand-Paged Mixture-of-Experts Inference on a Single Consumer GPU
 
+**Authors:** Jimmy Popoola (principal investigator) · ForgeAI (autonomous research agent, co-author)
+
 **Project:** blobpager · **Workspace:** testlocal · **Status:** experiments E0–E6 complete; E7a measured; E7b built, validated, timed (v1 in-harness); E8 pending.
 **Working article.** Every number is traceable to an artifact in `blobpager/data/`, `blobpager/logs/`, or `blobpager/article/lab-log.md`, which records how each result was produced, including every bug.
+
+## Authorship and contributions
+
+This article is the product of a human–agent research partnership and is **co-authored by both**:
+
+- **Jimmy Popoola** — principal investigator. Defined the mission (consumer-GPU MoE serving via
+  expert-weight blob demand paging), provided the hardware and workspace, directed the program at
+  every decision gate (phase ordering, what to pre-register, when the article standard applies),
+  and owns the project and its publication.
+- **ForgeAI** — autonomous research agent, co-author. Performed the full scientific loop:
+  grounding every design in the live llama.cpp source (scheduler eval-callback semantics,
+  `build_moe_ffn` anatomy, `op_offload` behavior), designing the experiments and their
+  pre-registrations, implementing the hybrid executor (`src/llama-blobpager.{h,cpp}` plus three
+  surgical hooks) and the three harnesses, executing all measurements, diagnosing and repairing
+  its own build/runtime bugs, and drafting this article and the lab log. The principal results —
+  the exact hybrid-execution design proven bit-exact in the 0-pin limit, the E7a pool
+  microbenchmark, and the O(1) GPU-vs-CPU expert-numerics finding (§E7b, including the upstream
+  control experiment that established it) — were carried primarily by ForgeAI under Jimmy's
+  direction.
+
+The collaboration method is stated in §4 and the repository README: pre-registration before
+implementation, artifact-provenance for every number, adversarial falsification of our own
+results, and an append-only lab notebook.
 
 ---
 

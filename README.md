@@ -12,6 +12,33 @@ llama.cpp, and the raw artifacts behind every published number.
 
 **Status:** E0–E7b complete · E8 (clean head-to-head) pending · next: v2 consolidated/async miss pass.
 
+## Authors
+
+**Jimmy Popoola** (principal investigator) and **ForgeAI** (autonomous research agent) — this research is a human–agent partnership, co-authored throughout.
+
+The division of labor is the interesting part. Jimmy set the mission (consumer-GPU MoE serving as
+paged memory), supplied the hardware, chose the direction at every decision gate, and owns the
+project. ForgeAI ran the scientific loop end to end: grounding the design in the live llama.cpp
+source (scheduler callback mechanics, `build_moe_ffn` anatomy, `op_offload` semantics), designing
+the experiments, writing the code (the `llama-blobpager` hybrid executor and the three harnesses),
+diagnosing and fixing its own bugs, executing every measurement, and writing the article and this
+repository. The discovery itself — an exact hybrid MoE executor whose 0-pin configuration is
+**bit-exact** against the incumbent, plus the finding that GPU-vs-CPU expert-matmul rounding shifts
+final logits by O(1) in *stock* llama.cpp without changing greedy outputs — was carried primarily
+by ForgeAI, with Jimmy's direction and judgment steering what to build and when to stop.
+
+**How we work (methodology).** The partnership runs on four rules, enforced in the workspace
+protocol: (1) *pre-registration* — hypotheses, metrics, and refutation bands are written down
+before an experiment runs; (2) *artifact provenance* — no number enters the article unless it
+exists as an artifact (log, JSON, trace), copied digit-for-digit; (3) *falsification first* —
+when a result looks wrong, we design a control experiment to kill our own hypothesis before
+believing it (the 0-pin run and the `-ncmoe 20`/`-ncmoe 48` upstream control both exist because
+we tried to refute our own work); (4) *append-only notebook* — every session, bug, and fix is
+logged in `blobpager/article/lab-log.md`, including the six build bugs the hybrid executor was
+shipped through. The reasoning style is deliberately adversarial toward our own conclusions:
+the E7b logit divergence was treated as a suspected bug and only reclassified as a discovery
+after the control experiment proved the same effect occurs in unmodified llama.cpp.
+
 ---
 
 ## The problem

@@ -26,3 +26,5 @@ llama.cpp/models/
 __pycache__/
 *.pyc
 .DS_Store
+# --- Withheld domain-private artifacts (retained locally, never published) ---
+/blobpager/private/

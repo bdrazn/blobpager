@@ -89,7 +89,7 @@ Design principle: zero source patches to llama.cpp wherever possible; where plac
 
 **Software.** llama.cpp built with CUDA 13.4.92 from user-space pip wheels (no sudo; Appendix A), `-DCMAKE_CUDA_ARCHITECTURES=89`; gcc 13.3.0; cmake 3.31.6; build e613ef2.
 
-**Corpus.** `gen_corpus.py` (seed 20260919): 480 train + 60 held-out seller-desk requests (~55 tokens average), 85% wrapped in serving shapes (reply-draft / classify / summarize / follow-up) with a shared system prefix, 15% raw fragments. Synthetic scenario library (hand-built) — a stated limitation.
+**Corpus.** `gen_corpus.py` (seed 20260919): 480 train + 60 held-out seller-desk requests (~55 tokens average), 85% wrapped in serving shapes (reply-draft / classify / summarize / follow-up) with a shared system prefix, 15% raw fragments. Synthetic scenario library (hand-built) — a stated limitation. The corpus text and the scenario library are withheld from the public repository for domain-privacy reasons (retained privately by the authors); every retained downstream artifact (traces, pins, manifest, run outputs) is numeric.
 
 **Observation.** The scheduler callback observes each layer's router output tensor (`ffn_moe_topk-<layer>`). DeepSeek/Qwen MTP auxiliary heads run as a trailing extra MoE "layer" on exactly one token; these observations are skipped by design and counted (532 in the E5 run).
 
@@ -217,6 +217,8 @@ Pre-registered in `blobpager/plan/e7-hybrid-preregistration.md` before implement
 
 The control is decisive: moving expert matmuls between backends shifts final logits by O(1) in *stock* llama.cpp (compounded GPU-vs-CPU matmul rounding through 47 residual layers) without changing greedy outputs. The hybrid's delta (4.87 over 65 steps) is the same class as the upstream placement delta (1.94 over 17 steps): the pre-registered 0.05 absolute threshold assumed backend-identical expert numerics and is mis-calibrated; the correct invariants are architectural exactness (proven bit-exact in the all-CPU limit) and greedy token identity (holds).
 
+Note on artifacts: the per-step logits dumps used for these comparisons are withheld from the public repository for domain privacy — each record carries the sampled token, so the generated response stream is reconstructable from them. The exact comparison numbers are preserved, without token values, in `blobpager/logs/e7b-validation-digest.json`.
+
 **Execution accounting.** Host miss pass measured at 185.8 µs per layer invocation (376 invocations, 521 miss draws = 1.386/layer, matching E5's 1.38; bytes read 1,486,651,392 B) — within the E7a-derived 145–211 µs band. Per token: CPU expert work drops from ~26.5 ms (all-CPU incumbency, 47 × 564.5 µs) to ~9.3 ms (0.6 ms GPU hits + 8.7 ms host misses + correction).
 
 **Timing** (`LLAMA_GRAPH_REUSE_DISABLE=1` per canon; both arms identical workload — 2 prefill + 32-token decode, `-t 20 -c 1024 -b 512 -ub 512`): baseline-with-callback interval 2.023 min (121.4 s) vs hybrid-with-callback **1.247 min (74.8 s) — the hybrid is 1.622× faster end-to-end through the same observation harness**. Absolute tok/s through this harness is dominated by the per-layer observation walk (one backend sync per layer's router stop — the #24528 lesson), so the pre-registered tg128-vs-25.23 endpoint cannot be honestly measured through it; the components projection for a consolidated/async v2 is ~13.1 ms attention+overhead (from the sweep) + ~9.3 ms hybrid MoE ≈ 22.4 ms/token ≈ **45 tok/s**, mid-band of the pre-registered 35–65. The prereg's refutation clause (per-layer sync dominates → pivot) is confirmed for the v1 measurement path and directs the v2 build.
@@ -258,7 +260,8 @@ Same corpus, same quant, both runners: wall-clock tok/s (prefill + decode) and l
 **Canonical commands.**
 
 ```bash
-# Corpus (seed fixed, reproducible)
+# Corpus (seed fixed, reproducible). Generator + corpus text are withheld from
+# the public repository for domain privacy; retained privately by the authors.
 python3 blobpager/tools/gen_corpus.py
 
 # Pager accounting run (from workspace root; GPU libs resolvable)
@@ -286,14 +289,15 @@ cd llama.cpp/build-cuda/bin && LLAMA_GRAPH_REUSE_DISABLE=1 ./llama-blobpager-pag
 
 | Artifact | Path | Role |
 | --- | --- | --- |
-| Corpus | `blobpager/data/corpus.txt`, `heldout.txt`, `corpus_meta.json` | 480 train + 60 held-out requests, seed 20260919 |
-| Traces | `blobpager/data/trace-{glm,qwen}-{train,heldout}.jsonl` | Full (layer, expert) routing traces |
+| Corpus | text withheld (domain privacy): `corpus.txt`, `heldout.txt`, `smoke-corpus.txt`; `corpus_meta.json` retained | 480 train + 60 held-out requests, seed 20260919 |
+| Traces | `blobpager/data/trace-{glm,qwen}-{train,heldout}.jsonl` | Full (layer, expert) routing traces (numeric only) |
 | Page table | `blobpager/data/manifest-qwen.json` | 48×128 expert byte extents + verification |
 | Pins | `blobpager/data/pins-qwen.txt` | Top-96/layer × 47 serving layers |
 | Pager run | `blobpager/data/pager-run.jsonl`, `pager-summary.json` | E5 accounting outputs |
 | Workset | `blobpager/data/workset-qwen.json`, `workset-summary.json` | E3 analysis outputs |
 | Model metadata | `blobpager/data/{qwen30b,glm_reap}_meta.json` | Tensor tables used by E2 |
 | Bench logs | `blobpager/logs/ncmoe-sweep.log`, `bench-ncmoe48-rerun.log` | Raw benchmark output |
+| E7b validation digest | `blobpager/logs/e7b-validation-digest.json` | Exact logits-comparison numbers (logits dumps withheld privately; no token values) |
 
 ## Sources
 

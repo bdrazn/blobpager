@@ -1,0 +1,63 @@
+{
+  "note": "Summary of E7b logits comparisons. Source per-step logits dumps are withheld from the public repository for domain privacy (each record carries the sampled token, so the generated response stream is reconstructable); this digest preserves the exact comparison numbers. Token values are NOT included. The hybrid dump was regenerated deterministically (identical build, pins, corpus, settings) on 2026-09-20 after the original was overwritten by later short runs.",
+  "threshold_preregistered_abs": 0.05,
+  "comparisons": [
+    {
+      "pair": "hybrid_96pin_vs_baseline",
+      "steps_compared": 65,
+      "sampled_tokens_identical": true,
+      "sampled_token_mismatches": 0,
+      "max_abs_logit_diff": 4.866536,
+      "max_diff_location": [
+        55,
+        302
+      ],
+      "argmax_steps_matching": 65
+    },
+    {
+      "pair": "zeropin_hybrid_vs_baseline",
+      "steps_compared": 17,
+      "sampled_tokens_identical": true,
+      "sampled_token_mismatches": 0,
+      "max_abs_logit_diff": 0.0,
+      "max_diff_location": null,
+      "argmax_steps_matching": 17
+    },
+    {
+      "pair": "control_ncmoe20_vs_ncmoe48",
+      "steps_compared": 17,
+      "sampled_tokens_identical": true,
+      "sampled_token_mismatches": 0,
+      "max_abs_logit_diff": 1.943982,
+      "max_diff_location": [
+        6,
+        2664
+      ],
+      "argmax_steps_matching": 17
+    },
+    {
+      "pair": "aux_hybrid2_vs_baseline",
+      "steps_compared": 33,
+      "sampled_tokens_identical": true,
+      "sampled_token_mismatches": 0,
+      "max_abs_logit_diff": 3.600505,
+      "max_diff_location": [
+        31,
+        35523
+      ],
+      "argmax_steps_matching": 33
+    },
+    {
+      "pair": "aux_mmq_vs_baseline",
+      "steps_compared": 17,
+      "sampled_tokens_identical": true,
+      "sampled_token_mismatches": 0,
+      "max_abs_logit_diff": 2.310741,
+      "max_diff_location": [
+        6,
+        311
+      ],
+      "argmax_steps_matching": 17
+    }
+  ]
+}

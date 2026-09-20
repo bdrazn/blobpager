@@ -143,6 +143,19 @@ claim in hybrid MoE serving must therefore be stated as *architectural exactness
 bit-exact in the all-CPU limit) plus *token identity* (holds), not logit equality.
 Pre-registered threshold analysis and the full argument: paper §E7b, §7.
 
+## Data privacy
+
+The seller-domain text — the corpus (`corpus.txt`, `heldout.txt`, `smoke-corpus.txt`) and the
+hand-built scenario library that generates it (`gen_corpus.py`) — is **withheld from this public
+repository** by the authors' decision and retained privately. The E7b per-step logits dumps are
+withheld for the same reason: each record carries the sampled token, so the generated response
+stream is reconstructable from them. Their evidentiary value is preserved numerically in
+`blobpager/logs/e7b-validation-digest.json` (exact comparison numbers only; no token values).
+
+Everything retained in `blobpager/data/` and `blobpager/logs/` is numeric — expert-routing
+traces, frequency pins, the blob manifest, workset statistics, benchmark logs — and contains no
+request or response text.
+
 ## Repository layout
 
 ```
@@ -152,10 +165,13 @@ blobpager/
   article/paper.md             the article (results enter only as artifacts)
   article/lab-log.md           session-by-session notebook
   plan/                        pre-registrations (hypothesis → method → metrics → refutation bands)
-  tools/                       gen_corpus.py, gguf_meta.py, gguf_layout.py, blobpack_manifest.py,
-                               emit_pins.py, workset.py
-  data/                        corpus, traces (GLM + Qwen), manifest, pins, pager run outputs
-  logs/                        raw benchmark logs, E7a microbench JSON, E7b logits dumps
+  tools/                       gguf_meta.py, gguf_layout.py, blobpack_manifest.py,
+                               emit_pins.py, workset.py, compare_logits.py
+                               (gen_corpus.py withheld — see Data privacy)
+  data/                        traces (GLM + Qwen), manifest, pins, workset analysis,
+                               pager run outputs (corpus text withheld — see Data privacy)
+  logs/                        raw benchmark logs, E7a microbench JSON,
+                               E7b validation digest (logits dumps withheld — see Data privacy)
 llama.cpp/                     snapshot of llama.cpp (base commit e613ef2) + BlobPager:
   src/llama-blobpager.{h,cpp}  the hybrid executor (pool, SLOTS remap, host miss pass)
   src/llama-graph.cpp          build_moe_ffn hybrid branch (pool arms + correction add)
@@ -172,6 +188,10 @@ Excluded from the repo (recreate locally): `blobpager/models/` (the 18.6 GB pilo
 usual GGUF release pages.
 
 ## Reproduce
+
+Note: the seller-domain corpus (`blobpager/data/corpus.txt`) is withheld from the repository
+(see Data privacy); the commands below document the exact protocol and run against the local
+private copy.
 
 Build (CUDA 13.4.92 user-space pip wheels, no sudo, arch 89):
 

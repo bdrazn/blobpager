@@ -259,3 +259,34 @@ artifact file. Numbers that exist only in memory are marked **[unverified]**.
   "Authorship and contributions" section — Jimmy Popoola (PI) and ForgeAI (autonomous research
   agent, co-author); the E7b discovery carried primarily by ForgeAI under Jimmy's direction.
 - Commit attribution uses the GitHub noreply email (26321402+bdrazn@users.noreply.github.com).
+
+## 2026-09-20 — Privacy redaction of seller-domain artifacts (ForgeAI)
+
+Jimmy directed removal of seller-domain data and response text from the public repository
+(domain privacy). Actions, in order:
+
+1. **Inventory.** Text-bearing artifacts: `data/corpus.txt`, `data/heldout.txt`,
+   `data/smoke-corpus.txt` (seller-desk prompts with invented street addresses/neighborhoods/
+   client names), `tools/gen_corpus.py` (the hand-built scenario library — the seed texts live
+   inside the generator), and the 8 E7b per-step logits dumps (each record carries the sampled
+   token, so the generated response stream is reconstructable). Verified numeric-only and kept:
+   traces, run JSONLs, pins, manifest, workset/model metadata, bench logs. Docs contained no
+   quoted corpus text (grep sweeps over address/neighborhood/name tokens and prompt phrasings).
+2. **Withheld to `blobpager/private/`** (gitignored, retained locally): the 4 text files +
+   all 8 logits bins (`e7b-{baseline,hybrid,zeropin,ncmoe20,ncmoe12,mmq,b2,h2}-logits.bin`).
+   Found `e7b-ncmoe12-logits.bin` to be 0 bytes (a failed run's remnant) — noted, discarded.
+3. **Artifact restoration.** The original 65-step hybrid logits dump had been overwritten by
+   later short runs (file held only 9 steps). Regenerated deterministically — identical build,
+   pins, corpus, settings (`--n-prefill 2 --n-gen-lines 1 --n-gen 64`, pool-fill 0) — producing
+   39,503,628 B / 65 steps again. Comparison vs baseline reproduced the paper's row digit-for-digit:
+   **65 steps, max diff 4.866536 @ step 55 vocab 302, sampled tokens identical 65/65**.
+4. **Digest artifact.** Rebuilt `blobpager/logs/e7b-validation-digest.json` (numeric comparisons
+   only, no token values): hybrid vs baseline 4.866536/65 steps/65-65 tokens; zeropin vs baseline
+   0.000000/17 steps/17-17 tokens; upstream control ncmoe20-vs-48 1.943982/17 steps/17-17 tokens;
+   aux pairs h2 (3.600505/33 steps) and mmq (2.310741/17 steps), all tokens identical.
+5. **Docs.** README: new Data privacy section, layout + reproduce notes. paper.md: §4 corpus
+   withholding note, E7b digest pointer, Appendix A corpus-command note, Appendix B inventory rows.
+6. **History.** The repo had been public ~1 h with **0 clones / 0 views / 0 forks** (traffic API),
+   so history was rewritten with `git filter-branch` (index-filter) to expunge the withheld paths
+   from every commit, reflog expired, `git gc --prune=now`, and force-pushed. Pre-rewrite SHAs
+   c97f2d5 / d37447b are superseded; the authorship content is preserved in the rewritten commits.

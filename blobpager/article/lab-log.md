@@ -300,3 +300,26 @@ Popoola is principal investigator **and the creator of ForgeAI** — the unified
 giving the agent cross-session continuity) was designed and built by him; ForgeAI is credited as
 "created and built by Jimmy Popoola." The co-authoring researcher is thus itself part of the
 first author's body of work. Repo description updated to match.
+
+## 2026-09-20 — Submission PDF rendered from paper.md (ForgeAI)
+
+Jimmy asked for a PDF of the article for arXiv submission. Built a mechanical renderer — no
+content is retyped by hand, so no number can drift: `blobpager/tools/make_pdf.py`
+(venv `~/.venvs/pdfenv`, created with `python3 -m venv ~/.venvs/pdfenv && pip install weasyprint
+pypdf markdown` → weasyprint 70.0, pypdf 6.19.0) converts `article/paper.md` → `article/paper.pdf`
+(US letter, DejaVu Serif 10 pt justified, ligatures off, digit-free running head, booktabs-style
+table rules, footer page numbers; `<thead>` page-break repetition disabled).
+
+Fidelity gate built into the script: it extracts the PDF text (pypdf) and diffs number-token
+multisets against the source's VISIBLE text (markdown link targets and backtick markup stripped
+on the source side; footer page numbers 1..N excluded from the diff), exiting nonzero on any
+missing or unexplained token. Result: **11 pages, 90,367 bytes; source tokens 629, pdf tokens
+640 — delta exactly the 11 footer page numbers; missing 0, extra 0 → PASSED.**
+
+Checker debug notes (all checker-side alignment, zero document defects): initial run flagged
+(1) 7 "missing" tokens — digits inside markdown link targets (`pull/15077`, `discussions/24528`,
+arXiv ids in URLs) that are invisible in the PDF by design; (2) 2 "extra" tokens — the E6 table's
+repeated `<thead>` (`pp512`/`tg128`) across the pages-6/7 break; (3) one extra `2,`/`48,` class
+artifact — pypdf inserts a space at a code-span boundary (`-r 2 ,`), splitting the token. All
+fixed in the checker (visible-to-visible comparison, `thead` repeat off, trailing-punctuation
+strip on both sides); the document itself needed no changes.

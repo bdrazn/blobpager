@@ -1,0 +1,28 @@
+# --- Forge workspace internals (not part of the repo) ---
+/.adk/
+/.forge/
+/.forge-thread-files/
+/.consolidation.json
+/.core-brain/
+/.data/
+/data/
+/facts/
+/memory/
+/tmp-inventions/
+/downloads/
+/uploads/
+/vscode-source/
+/AGENTS.md
+
+# --- Heavy local artifacts (recreate locally; see README) ---
+blobpager/models/
+
+# --- llama.cpp build artifacts and upstream test models ---
+llama.cpp/build/
+llama.cpp/build-cuda/
+llama.cpp/models/
+
+# --- generic ---
+__pycache__/
+*.pyc
+.DS_Store

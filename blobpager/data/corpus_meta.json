@@ -1,0 +1,7 @@
+{
+  "seed": 20260919,
+  "train": 480,
+  "heldout": 60,
+  "unwrapped_share": 0.15,
+  "note": "pattern bank unavailable; hand-built scenario library"
+}

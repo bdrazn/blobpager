@@ -1,0 +1,32 @@
+=== ncmoe=48 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         48 |      20 |           pp512 |       615.22 ± 13.57 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         48 |      20 |           tg128 |         25.23 ± 3.47 |
+=== ncmoe=44 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         44 |      20 |           pp512 |        671.26 ± 4.41 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         44 |      20 |           tg128 |         28.87 ± 4.39 |
+=== ncmoe=40 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         40 |      20 |           pp512 |       729.20 ± 18.96 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         40 |      20 |           tg128 |         24.97 ± 1.31 |
+=== ncmoe=36 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         36 |      20 |           pp512 |        781.67 ± 4.22 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         36 |      20 |           tg128 |         15.73 ± 0.30 |
+=== ncmoe=32 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         32 |      20 |           pp512 |       869.09 ± 19.39 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         32 |      20 |           tg128 |         17.30 ± 0.10 |
+=== ncmoe=28 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         28 |      20 |           pp512 |       966.22 ± 22.59 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         28 |      20 |           tg128 |         19.81 ± 1.56 |
+=== ncmoe=24 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         24 |      20 |           pp512 |      1064.91 ± 26.94 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         24 |      20 |           tg128 |         21.71 ± 0.78 |
+=== ncmoe=20 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         20 |      20 |           pp512 |      1191.13 ± 28.10 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         20 |      20 |           tg128 |         27.14 ± 1.67 |
+=== ncmoe=16 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         16 |      20 |           pp512 |      1410.29 ± 39.91 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         16 |      20 |           tg128 |         35.67 ± 3.53 |
+=== ncmoe=12 ===
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         12 |      20 |           pp512 |      1672.44 ± 44.68 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | CUDA       |  99 |         12 |      20 |           tg128 |         50.31 ± 5.09 |
+=== ncmoe=8 ===
+llama_bench: error: failed to load model '/home/jimmyforge/Desktop/testlocal/blobpager/models/Qwen3-30B-A3B-Q4_K_M.gguf'

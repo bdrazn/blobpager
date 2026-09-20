@@ -1,0 +1,5 @@
+set(TARGET llama-blobpager-bench)
+add_executable(${TARGET} blobpager-bench.cpp)
+install(TARGETS ${TARGET} RUNTIME DESTINATION bin)
+target_link_libraries(${TARGET} PRIVATE llama-common llama ggml ${CMAKE_THREAD_LIBS_INIT})
+target_compile_features(${TARGET} PRIVATE cxx_std_17)

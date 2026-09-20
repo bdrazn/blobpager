@@ -1,0 +1,26 @@
+main: pins loaded: 47 layers, 96 pins/layer (limit 96)
+0.00.395.876 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.00.440.452 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.01.846.790 I cmn          init: llama threadpool init, n_threads = 20
+0.01.847.835 I main: pin lookups ready: 47 layers, expert_count 128
+0.01.847.885 I main: corpus 480 lines; plan: 2 prefill-only + 1 prefill+generate(64)
+0.03.220.544 I main: prefill-only accounting done over 2 requests
+/home/jimmyforge/Desktop/testlocal/llama.cpp/ggml/src/ggml.c:1805: GGML_ASSERT(obj_new) failed
+0.03.869.445 W ggml_new_object: not enough space in the context's memory pool (needed 17254288, available 16777216)
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(+0x1d39b)[0x7780061da39b]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x7780061da81c]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_abort+0x15b)[0x7780061da9fb]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_new_tensor+0x1f8)[0x7780061dcf38]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_new_tensor_2d+0x2e)[0x7780061dd00e]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_Z23llama_blobpager_cb_evalP11ggml_tensorbPv+0xda2)[0x7780059e2f32]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_backend_sched_graph_compute_async+0x336)[0x7780061f9966]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xa1)[0x7780059f3de1]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x146)[0x7780059f7a66]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x63d)[0x7780059ff69d]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(llama_decode+0xf)[0x778005a00b2f]
+./llama-blobpager-pager(+0x7167)[0x621759fde167]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x77800502a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x77800502a28b]
+./llama-blobpager-pager(+0x7ac5)[0x621759fdeac5]
+bash: line 9: 94589 Aborted                 (core dumped) BLOBPAGER_PINS=$PINS BLOBPAGER_MAXT=8 BLOBPAGER_STATS=../../../blobpager/logs/e7b-hybrid-stats.json ./llama-blobpager-pager -m ../../../blobpager/models/Qwen3-30B-A3B-Q4_K_M.gguf -ngl 99 -ncmoe 48 -t 20 -c 1024 -b 512 -ub 512 --corpus ../../../blobpager/data/corpus.txt --pins $PINS --out ../../../blobpager/logs/e7b-hybrid-run.jsonl --dump-logits ../../../blobpager/logs/e7b-hybrid-logits.bin --pool-fill 0 --n-prefill 2 --n-gen-lines 1 --n-gen 64
+HYBRID_RUN_DONE

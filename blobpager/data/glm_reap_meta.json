@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "general.architecture": "deepseek2",
+    "general.name": "cerebras/GLM-4.7-Flash-REAP-23B-A3B",
+    "general.quantized_by": "Unsloth",
+    "deepseek2.block_count": 47,
+    "deepseek2.context_length": 202752,
+    "deepseek2.embedding_length": 2048,
+    "deepseek2.attention.head_count": 20,
+    "deepseek2.attention.head_count_kv": 1,
+    "deepseek2.expert_used_count": 4,
+    "deepseek2.leading_dense_block_count": 1,
+    "deepseek2.attention.key_length": 576,
+    "deepseek2.attention.value_length": 512,
+    "deepseek2.attention.key_length_mla": 256,
+    "deepseek2.attention.value_length_mla": 256,
+    "deepseek2.expert_feed_forward_length": 1536,
+    "deepseek2.expert_count": 48,
+    "general.file_type": 14,
+    "quantize.imatrix.file": "GLM-4.7-Flash-REAP-23B-A3B-GGUF/imatrix_unsloth.gguf",
+    "quantize.imatrix.dataset": "unsloth_calibration_GLM-4.7-Flash-REAP-23B-A3B.txt",
+    "quantize.imatrix.entries_count": 607,
+    "quantize.imatrix.chunks_count": 85
+  },
+  "arch": "deepseek2",
+  "n_tensors": 844,
+  "expert_tensors": 138
+}

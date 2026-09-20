@@ -1,0 +1,12 @@
+{
+  "active": 1,
+  "broken": 0,
+  "n_serving": 47,
+  "maxt": 8,
+  "pass_invocations": 376,
+  "miss_draws": 521,
+  "bytes_read": 1486651392,
+  "pass_us_total": 69894.5,
+  "cpu_graph_us_total": 63212.6,
+  "gpu_io_us_total": 5601.22
+}

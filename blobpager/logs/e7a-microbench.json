@@ -1,0 +1,28 @@
+{
+  "experiment": "E7a_pool_microbench",
+  "layer": 0,
+  "n_embd": 2048,
+  "n_ff": 768,
+  "n_expert": 128,
+  "n_expert_used": 8,
+  "n_pins": 96,
+  "n_slots": 97,
+  "expert_bytes": 884736,
+  "type": "Q4_K",
+  "pool_bytes": 85819392,
+  "K": 10000,
+  "gpu_arm": [
+    {"label": "0miss_8hit", "us_per_call": 12.50, "gb_per_s": 527.13, "bytes": 7077888},
+    {"label": "1miss_7hit", "us_per_call": 12.29, "gb_per_s": 536.31, "bytes": 7077888},
+    {"label": "2miss_6hit", "us_per_call": 11.71, "gb_per_s": 562.84, "bytes": 7077888}
+  ],
+  "cpu_arm_f32": [
+    {"label": "1miss_CPU_F32", "us_per_call": 168.58, "gb_per_s": 34.76, "bytes": 6291456},
+    {"label": "2miss_CPU_F32", "us_per_call": 192.63, "gb_per_s": 60.84, "bytes": 12582912}
+  ],
+  "cpu_arm_q4k_derived": [
+    {"label": "1miss_CPU_Q4K_derived", "us_per_call_est": 145, "method": "baseline_derived_from_ncmoe48"},
+    {"label": "2miss_CPU_Q4K_derived", "us_per_call_est": 211, "method": "baseline_derived_from_ncmoe48"}
+  ],
+  "notes": "GPU arm measured 3 runs K=1000 each (12.0±0.2, 12.1±0.3, 12.1±0.5 us). CPU arm crashed with Q4_K (ggml backend buffer lifetime bug); F32 proxy measured at K=10000. Derived Q4_K estimate from --cpu-moe baseline: 25.23 tok/s × 47 layers × 8 draws = 376 expert-reads/tok; per-layer all-CPU = 843 us; 1-miss = 843 × 1.38/8 ≈ 145 us; 2-miss ≈ 211 us."
+}

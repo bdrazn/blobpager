@@ -1,0 +1,13 @@
+main: pins loaded: 47 layers, 96 pins/layer (limit 96)
+0.00.434.727 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.00.475.770 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.00.594.022 W llama_context: graph reuse disabled
+0.00.601.334 I cmn          init: llama threadpool init, n_threads = 20
+0.00.601.364 I main: pin lookups ready: 47 layers, expert_count 128
+0.02.312.086 I main: pool fill OK: 47 layers x 96 pins, 12871139328 B, read 0.913 s (14.10 GB/s), upload 0.695 s (18.51 GB/s)
+0.02.312.141 I main: corpus 480 lines; plan: 16 prefill-only + 4 prefill+generate(128)
+0.12.163.298 I main: prefill-only accounting done over 16 requests
+0.24.066.773 I main: req 16 generated 128 tokens
+0.35.592.240 I main: req 17 generated 128 tokens
+0.47.203.549 I main: req 18 generated 128 tokens
+0.58.448.545 I main: req 19 generated 128 tokens

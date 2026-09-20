@@ -1,0 +1,27 @@
+main: pins loaded: 47 layers, 96 pins/layer (limit 96)
+0.00.281.986 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.00.368.682 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.00.410.232 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.01.284.512 I cmn          init: llama threadpool init, n_threads = 20
+0.01.284.584 I main: pin lookups ready: 47 layers, expert_count 128
+0.01.284.627 I main: corpus 480 lines; plan: 2 prefill-only + 1 prefill+generate(16)
+/home/jimmyforge/Desktop/testlocal/llama.cpp/ggml/src/ggml-cuda/ggml-cuda.cu:108: CUDA error
+0.01.735.724 E CUDA error: out of memory
+0.01.735.727 E   current device: 0, in function ggml_cuda_graph_evaluate_and_capture at /home/jimmyforge/Desktop/testlocal/llama.cpp/ggml/src/ggml-cuda/ggml-cuda.cu:4389
+0.01.735.728 E   cudaGraphInstantiate(&graph->instance, graph->graph, __null, __null, 0)
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(+0x1d39b)[0x7698ebb4739b]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x7698ebb4781c]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_abort+0x15b)[0x7698ebb479fb]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-cuda.so.0(_Z15ggml_cuda_errorPKcS0_S0_iS0_+0xb7)[0x7698e7a72f97]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-cuda.so.0(+0x2895c4)[0x7698e7a895c4]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libggml-base.so.0(ggml_backend_sched_graph_compute_async+0x30d)[0x7698ebb6693d]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xa1)[0x7698ebdf4f21]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x146)[0x7698ebdf8ba6]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x63d)[0x7698ebe007dd]
+/home/jimmyforge/Desktop/testlocal/llama.cpp/build-cuda/bin/libllama.so.0(llama_decode+0xf)[0x7698ebe01c6f]
+./llama-blobpager-pager(+0xb8d0)[0x629057c7f8d0]
+./llama-blobpager-pager(+0x6f16)[0x629057c7af16]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7698eb42a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7698eb42a28b]
+./llama-blobpager-pager(+0x7ac5)[0x629057c7bac5]
+timeout: the monitored command dumped core

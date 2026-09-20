@@ -323,3 +323,38 @@ repeated `<thead>` (`pp512`/`tg128`) across the pages-6/7 break; (3) one extra `
 artifact — pypdf inserts a space at a code-span boundary (`-r 2 ,`), splitting the token. All
 fixed in the checker (visible-to-visible comparison, `thead` repeat off, trailing-punctuation
 strip on both sides); the document itself needed no changes.
+
+## 2026-09-20 — Forum posts to llama.cpp discussions (ForgeAI)
+
+Jimmy directed posting the work into the two llama.cpp discussions the paper builds on.
+Read both threads first (authors, bodies, recent comments) to thread correctly, then
+posted as bdrazn:
+
+1. **#24528** (leloch's RFC "MoE expert cache, VRAM caching of hot CPU-resident experts
+   with hybrid hit/miss execution") — results follow-up:
+   https://github.com/ggml-org/llama.cpp/discussions/24528#discussioncomment-18525670
+   Frames our work as an independent implementation of the RFC's design (not built on
+   moe-cache-pr; upstream base e613ef2), with full disclosure of the ForgeAI authorship
+   model. Sections: setup (expert set 17,553,162,240 B vs 15,942 MiB; baseline pp512
+   615.22 ± 13.57 / tg128 25.23 ± 3.47), working-set replication of noonghunna's
+   budget-share conclusion (LRU 25.1% vs pins 77.9% heldout at 96/128; live decode
+   82.76%; top-16 13.7% vs uniform 12.5%), the E7b exactness table (0-pin bit-exact,
+   13,536 slots 0 mismatches, self-test 0.000455, 65/65 tokens, upstream control
+   1.94398/17 steps as an A/B caution flag), honest timing statement (1.622× same-harness,
+   no clean tg128 claim, ~45 tok/s projection), mechanistic note for batot1's 1080 Ti
+   regression (12.0 ± 0.2 µs GPU pool vs ~145 µs CPU miss), E6 valley (15.73–17.30 at
+   32–40 CPU layers vs 25.23; 50.31 at ncmoe=12), implementation note, v2 question.
+2. **#23324** (kisasexypantera94's RFC+PoC "MoE offload to disk with on-demand paging") —
+   complementary findings:
+   https://github.com/ggml-org/llama.cpp/discussions/23324#discussioncomment-18525671
+   (1) E2 layout audit confirms jerryjokesalot's expert-major conjecture on these files —
+   3 contiguous runs per expert, manifest from tensor table alone, no re-layout (answers
+   unbug's format concern); (2) LRU→frequency-pins slot policy (25.1% → 77.9% at 96/128;
+   GLM 8.3% → 52.1% at 24/48; live decode 82.76%), converging with jerryjokesalot's
+   calibrated-pinning measurements; (3) E4 staging numbers (12,871,139,328 B in 1.61 s);
+   (4) brief exact-hybrid summary with honest status. Pointers to #24528 post and repo.
+
+Also recorded: the submission PDF was renamed for arXiv submission
+(`article/paper.pdf` → `article/BlobPager: Demand-Paged Mixture-of-ExpertsInference on a
+Single Consumer GPU.pdf`, 90,367 bytes — matches the fidelity-gated artifact byte count).
+README links reference only `paper.md`, so nothing breaks; rename committed as-is.

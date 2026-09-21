@@ -358,3 +358,15 @@ Also recorded: the submission PDF was renamed for arXiv submission
 (`article/paper.pdf` → `article/BlobPager: Demand-Paged Mixture-of-ExpertsInference on a
 Single Consumer GPU.pdf`, 90,367 bytes — matches the fidelity-gated artifact byte count).
 README links reference only `paper.md`, so nothing breaks; rename committed as-is.
+
+## 2026-09-21 — Consolidated llama.cpp presence: standalone discussion #29234; thread comments removed
+
+- User directive: move the llama.cpp public presence from two thread comments into one standalone discussion post ("post as a discussion post on llama.cpp and remove from those threads").
+- Pre-deletion safety check (GraphQL, replies connection): both comments had **0 replies** — deletion would destroy only our own content, nothing of any replier's. Verified before executing.
+- Created discussion in ggml-org/llama.cpp **Show and tell**: **#29234** — "BlobPager: demand-paged MoE expert serving on a single consumer GPU — exact hybrid executor (E0–E7b artifacts)" — https://github.com/ggml-org/llama.cpp/discussions/29234 . Body = consolidated announcement (working set E3, layout E2, pool E4, microbench E7a, E7b validation table, honest timing statement incl. no-clean-tg128 caveat and ~45 tok/s v2 projection, upstream numerics control 1.94398 / 17 steps, pointers to #24528 and #23324, repo link, ForgeAI disclosure line).
+- Deleted both thread comments (mutation `deleteDiscussionComment`; note the input field is `id`, not `commentId` — two failed payload attempts recorded before the working call):
+  - #24528: `DC_kwDOJH_K4M4BGq3m` (posted 2026-09-20T09:45:54Z)
+  - #23324: `DC_kwDOJH_K4M4BGq3n` (posted 2026-09-20T09:45:55Z)
+- Post-change verification (GraphQL re-fetch): author `bdrazn` absent from both threads' comment lists; #29234 live in Show and tell, 0 comments.
+- Commands: `gh api graphql --input /tmp/create-discussion.json` (mutation `createDiscussion`, repositoryId R_kgDOJH_K4A, categoryId DIC_kwDOJH_K4M4CU2z8); combined two-mutation delete via `--input /tmp/delete-comments.json`; verification query over discussions 24528/23324/29234.
+- Net public state: one canonical announcement thread (#29234) linking the repo and the two RFC threads; no residual bdrazn comments elsewhere.
